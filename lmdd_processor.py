@@ -6,7 +6,6 @@ import sys
 import string
 import re
 import xlsxwriter
-from optparse import OptionParser
 
 class LmddProcessor(object):
     def __init__(self,excle_name,tims, size):

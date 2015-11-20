@@ -2,7 +2,6 @@
 
 __author__ = 'bigzhang'
 
-from sys import stdin
 from pyadb import ADB
 
 class LmddSpeed(object):
@@ -14,9 +13,9 @@ class LmddSpeed(object):
             self.__times = 10
         else:
             self.__times = times
-        #size_list = ['8k', '16k', '32k', '64k', '128k', '256k', '512k', '1m', '2m', '4m', '8m', '16m', '32m', '64m', '128m', '256m', '512m']
+        #size_list = ['8k', '32k', '128k', '512k', '2m', '8m', '32m', '128m', '512m']
         if size_list == None:
-            self.__size_list = ['8k', '16k', '32k', '64k', '128k', '256k', '512k', '1m', '2m', '4m', '8m', '16m', '32m', '64m', '128m', '256m', '512m']
+            self.__size_list = ['8k', '16k', '32k', '64k', '128k', '256k', '512k', '1m', '2m', '4m', '8m', '16m', '32m', '64m', '128m', '256m', '512m', '1024m']
         else:
             self.__size_list = size_list
         self.__adb = adb

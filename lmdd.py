@@ -13,7 +13,7 @@ if __name__ == '__main__':
     parser = OptionParser()
     parser.add_option('-t', '--times', dest = "times",
                       help = "Test Times",
-                      default = 20, type = "int")
+                      default = 10, type = "int")
 
     (options, args) = parser.parse_args()
 

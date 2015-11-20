@@ -16,7 +16,7 @@ class LmddSpeed(object):
             self.__times = times
         #size_list = ['8k', '16k', '32k', '64k', '128k', '256k', '512k', '1m', '2m', '4m', '8m', '16m', '32m', '64m', '128m', '256m', '512m']
         if size_list == None:
-            self.__size_list = ['8k', '16k', '32k', '64k', '128k']
+            self.__size_list = ['8k', '16k', '32k', '64k', '128k', '256k', '512k', '1m', '2m', '4m', '8m', '16m', '32m', '64m', '128m', '256m', '512m']
         else:
             self.__size_list = size_list
         self.__adb = adb

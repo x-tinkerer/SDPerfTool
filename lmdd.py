@@ -15,7 +15,7 @@ if __name__ == '__main__':
         print "ERROR"
         exit(-2)
 
-    current_time = datetime.datetime.now().strftime("%Y-%m-%d_%H:%M:%S")
+    current_time = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     speed_file = 'lmdd_perf_' + current_time + '.log'
     xlsx_file = 'lmdd_perf_' + current_time + '.xlsx'
 

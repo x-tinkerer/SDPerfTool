@@ -17,11 +17,16 @@ if __name__ == '__main__':
 
     (options, args) = parser.parse_args()
 
+    adb_conf = open('adb.conf', 'r')
+    adbpath = adb_conf.readlines()
+    if adbpath == '':
+        print "Please config adb path!"
+        exit(0)
     adb = ADB()
-    adb.set_adb_path('/home/bigzhang/Android/Sdk/platform-tools/adb')
+    adb.set_adb_path(adbpath[0])
     # verity ADB path
     if adb.check_path() is False:
-        print "ERROR"
+        print "ERROR: ADB PATH NOT Correct."
         exit(-2)
 
     current_time = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")

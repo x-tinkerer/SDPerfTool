@@ -9,7 +9,7 @@ import xlsxwriter
 from optparse import OptionParser
 
 class LmddProcessor(object):
-    def __init__(self,excle_name,tims):
+    def __init__(self,excle_name,tims, size):
         """
         """
         workbook = xlsxwriter.Workbook(excle_name)
@@ -34,6 +34,7 @@ class LmddProcessor(object):
         self.avgindex = 0
 
         self.testtimes = tims
+        self.listsize = size
 
     """
     find out read/write performance data,
@@ -63,6 +64,33 @@ class LmddProcessor(object):
                 self.worksheet.write(avgrow, 10, fields['size']+'k')
                 #self.worksheet.write(avgrow, 11, float(fields['timeavg']))
                 self.worksheet.write(avgrow, 11, float(fields['perfavg']))
+
+    def add_chart(self):
+        # Create a new chart object.
+        chart = self.workbook.add_chart({'type': 'line'})
+
+        chart.set_x_axis({
+            'name': 'Size',
+            'name_font': {'size': 14, 'bold': True},
+            'num_font':  {'italic': True },
+        })
+
+        # Add a series to the chart.
+        avg_col =self.listsize + 1
+        arr_str = '=Sheet1!$L$2:$L$' + str(avg_col)
+        chart.add_series({
+            'name': 'Write',
+            'values': arr_str
+        })
+
+        # Add a series to the chart.
+        arr_str = '=Sheet1!$M$2:$M$' + str(avg_col)
+        chart.add_series({
+            'name': 'Read',
+            'values': arr_str,
+        })
+
+        self.worksheet.insert_chart('L20', chart)
 
     def finish(self):
         self.workbook.close()
@@ -134,6 +162,7 @@ class LmddProcessor(object):
                 if fields:
                     self.write_excle(fields)
 
+            self.add_chart()
             self.finish()
 
 

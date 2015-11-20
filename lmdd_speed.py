@@ -8,7 +8,7 @@ from pyadb import ADB
 class LmddSpeed(object):
     __adb =None
     __times = 0
-    __size_list =None
+    __size_list =[]
     def __init__(self, times=None, size_list=None, adb=None):
         if times == None:
             self.__times = 10
@@ -16,7 +16,7 @@ class LmddSpeed(object):
             self.__times = times
         #size_list = ['8k', '16k', '32k', '64k', '128k', '256k', '512k', '1m', '2m', '4m', '8m', '16m', '32m', '64m', '128m', '256m', '512m']
         if size_list == None:
-            self.__size_list = ['8k', '16k', '32k', '64k', '128k', '256k', '512k']
+            self.__size_list = ['8k', '16k', '32k', '64k', '128k']
         else:
             self.__size_list = size_list
         self.__adb = adb
@@ -25,6 +25,9 @@ class LmddSpeed(object):
         fd.writelines('== HW Info ==')
         cpuinfo = self.__adb.shell_command('cat /proc/cpuinfo')
         fd.writelines(cpuinfo)
+
+    def get_list_size(self):
+        return len(self.__size_list)
 
     def prepare_env(self):
         self.__adb.shell_command('stop')

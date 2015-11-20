@@ -19,8 +19,9 @@ if __name__ == '__main__':
 
     adb_conf = open('adb.conf', 'r')
     adbpath = adb_conf.readlines()
-    if adbpath == '':
-        print "Please config adb path!"
+    adb_conf.close()
+    if adbpath == []:
+        print "Please config ADB PATH!"
         exit(0)
     adb = ADB()
     adb.set_adb_path(adbpath[0])

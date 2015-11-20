@@ -80,7 +80,13 @@ class LmddProcessor(object):
         arr_str = '=Sheet1!$L$2:$L$' + str(avg_col)
         chart.add_series({
             'name': 'Write',
-            'values': arr_str
+            'values': arr_str,
+            'marker': {
+                'type': 'square',
+                'size': 4,
+                'border': {'color': 'black'},
+                'fill':   {'color': 'red'},
+            },
         })
 
         # Add a series to the chart.
@@ -88,6 +94,12 @@ class LmddProcessor(object):
         chart.add_series({
             'name': 'Read',
             'values': arr_str,
+            'marker': {
+                'type': 'square',
+                'size': 4,
+                'border': {'color': 'blue'},
+                'fill':   {'color': 'red'},
+            },
         })
 
         self.worksheet.insert_chart('L20', chart)

@@ -54,14 +54,14 @@ class LmddProcessor(object):
                 #self.worksheet.write(avgrow, 14, float(fields['timeavg']))
                 self.worksheet.write(avgrow, 12, float(fields['perfavg']))
         else:
-            self.worksheet.write(row, 0, fields['size']+'k')
+            self.worksheet.write(row, 0, fields['size'])
             self.worksheet.write(row, 1, float(fields['index']))
             self.worksheet.write(row, 2, float(fields['time']))
             self.worksheet.write(row, 3, float(fields['perf']))
 
             if(fields['index'] == self.testtimes ):
                 avgrow = fields['avgindex']
-                self.worksheet.write(avgrow, 10, fields['size']+'k')
+                self.worksheet.write(avgrow, 10, fields['size'])
                 #self.worksheet.write(avgrow, 11, float(fields['timeavg']))
                 self.worksheet.write(avgrow, 11, float(fields['perfavg']))
 
@@ -115,7 +115,7 @@ class LmddProcessor(object):
         issize = re.search(r'\sSize ===', line)
         if issize:
             #print line
-            dosize = re.findall(r'[\d|.]+',line)
+            dosize = re.findall(r'\d+[k|m]',line)
             self.size = dosize[0]
             self.reset_count()
             self.avgindex += 1

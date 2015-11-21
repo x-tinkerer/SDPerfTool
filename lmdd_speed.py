@@ -46,6 +46,7 @@ class LmddSpeed(object):
 
     def finish(self):
         self.__adb.shell_command('rm /data/lmdd')
+        self.__adb.shell_command('rm %s' % self.__target_path)
         self.__adb.shell_command('start')
 
     def lmdd_write(self, fd):

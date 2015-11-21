@@ -9,14 +9,19 @@ from lmdd_speed import LmddSpeed
 from optparse import OptionParser
 
 if __name__ == '__main__':
-    usage = "usage: %prog -t times"
+    usage = "usage: %prog [-d target]{-t times}"
     parser = OptionParser()
     parser.add_option('-t', '--times', dest = "times",
                       help = "Test Times",
                       default = 10, type = "int")
 
+    parser.add_option('-d', '--dest', dest = "dest",
+                      help = "The target test path, data or sdcard or sdcard1",
+                      default = 'data', type = "string")
+
     (options, args) = parser.parse_args()
 
+    # get adb path for config file.
     adb_conf = open('adb.conf', 'r')
     adbpath = adb_conf.readlines()
     adb_conf.close()

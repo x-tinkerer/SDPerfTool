@@ -8,6 +8,8 @@ from lmdd_processor import LmddProcessor
 from lmdd_speed import LmddSpeed
 from optparse import OptionParser
 
+target_list=['data', 'sdcard', 'sdcard1']
+
 if __name__ == '__main__':
     usage = "usage: %prog [-d target]{-t times}"
     parser = OptionParser()
@@ -15,9 +17,9 @@ if __name__ == '__main__':
                       help = "Test Times",
                       default = 10, type = "int")
 
-    parser.add_option('-d', '--dest', dest = "dest",
+    parser.add_option('-d', '--dest', dest = "target",
                       help = "The target test path, data or sdcard or sdcard1",
-                      default = 'data', type = "string")
+                      type = "string")
 
     (options, args) = parser.parse_args()
 
@@ -64,7 +66,18 @@ if __name__ == '__main__':
 
     # built SPEED Tester.
     test_times = options.times
-    tester = LmddSpeed(test_times, None, adb)
+    test_target = options.target
+
+    if test_target not in target_list:
+        print 'PLEASE INPUT TARGET PATH!'
+        print '--- Target: data or sdcard or sdcard1 ---'
+        print '--- Target: data or sdcard or sdcard1 ---'
+        print '--- Target: data or sdcard or sdcard1 ---'
+        exit(0)
+    else:
+        print 'Test Target:%s' %test_target
+
+    tester = LmddSpeed(test_times, None, adb, test_target)
     list_size = tester.get_list_size()
     input_file = open(speed_file, 'wb+')
 

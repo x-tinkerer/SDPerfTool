@@ -8,7 +8,9 @@ class LmddSpeed(object):
     __adb =None
     __times = 0
     __size_list =[]
-    def __init__(self, times=None, size_list=None, adb=None):
+    __target ='/data'
+
+    def __init__(self, times=None, size_list=None, adb=None, target=None):
         if times == None:
             self.__times = 10
         else:
@@ -19,6 +21,14 @@ class LmddSpeed(object):
         else:
             self.__size_list = size_list
         self.__adb = adb
+        self.__target = target
+
+        if target == 'data':
+            self.__target_path = '/data/dumb'
+        elif target == 'sdcard':
+            self.__target_path = '/storage/sdcard/dumb'
+        else:
+            self.__target_path = '/storage/sdcard1/dumb'
 
     def lmdd_header(self, fd):
         fd.writelines('== HW Info ==')
@@ -45,7 +55,7 @@ class LmddSpeed(object):
             print('=== %s === \n' %size)
             fd.writelines('=== %s Size ===\n' %size)
             while loop < self.__times:
-                perf_out = self.__adb.shell_command('/data/lmdd if=internal of=/data/dumb move=%s fsync=1' % size)
+                perf_out = self.__adb.shell_command('/data/lmdd if=internal of=%s move=%s fsync=1' % (self.__target_path, size))
                 print(perf_out)
                 fd.writelines(perf_out)
                 loop = loop + 1
@@ -58,7 +68,7 @@ class LmddSpeed(object):
             fd.writelines('=== %s Size ===\n' %size)
             while loop < self.__times:
                 self.__adb.shell_command('echo 3 > /proc/sys/vm/drop_caches')
-                perf_out = self.__adb.shell_command('/data/lmdd if=/data/dumb of=internal move=%s fsync=1' % size)
+                perf_out = self.__adb.shell_command('/data/lmdd if=%s of=internal move=%s fsync=1' %(self.__target_path, size))
                 print(perf_out)
                 fd.writelines(perf_out)
                 loop = loop + 1

@@ -14,6 +14,7 @@ use command line: pip install XlsxWriter
 Modify adb.conf, replace whit your computer's adb path.
 
 ### How To Use:
-Run as command line: python lmdd.py [-t times]
+Run as command line: python lmdd.py [-d target ]{-t times}
 
-times option default is 10, if you do not write anything.
+target: is data or sdcard or sdcard1.
+times: default is 10, if you do not write anything.
